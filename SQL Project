@@ -1,0 +1,47 @@
+--Create a videos table
+CREATE TABLE videos (
+video_id INT PRIMARY KEY,
+title VARCHAR(100) NOT NULL,
+vid_length TIME(0) NOT NULL,
+url VARCHAR(250) UNIQUE NOT NULL 
+);
+
+--Populate videos table
+INSERT INTO videos(video_id, title, vid_length, url)
+VALUES
+(100, 'THE9 -《SphinX》MV', '03:42', 'https://www.youtube.com/watch?v=NY4Eq7tmiYM&ab_channel=THE9Official' ),
+(101, 'THE9- “SphinX” Dance Performance Video | iQIYI', '03:48', 'https://www.youtube.com/watch?v=q_t5N7HYOUY&ab_channel=iQIYI%E7%88%B1%E5%A5%87%E8%89%BA'),
+(102, '【LIVE】THE9《Not Me》燃炸舞台 一键换装超神秘！[ 百度好奇夜晚会 ]/浙江卫视官方HD', '02:53', 'https://www.youtube.com/watch?v=hHLRFlKPNMA&ab_channel=%E6%B5%99%E6%B1%9F%E5%8D%AB%E8%A7%86%E9%9F%B3%E4%B9%90%E9%A2%91%E9%81%93ZJSTVMusicChannel-%E6%AC%A2%E8%BF%8E%E8%AE%A2%E9%98%85-'),
+(103, 'Stage: THE9 - "Dumb Dumb Bomb" | 2021 iQIYI Shout Out For Love GALA | 2021爱奇艺为爱尖叫 | iQIYI', '03:20', 'https://www.youtube.com/watch?v=pmfs9qx7ZGM&ab_channel=iQIYI%E7%88%B1%E5%A5%87%E8%89%BA')
+;
+
+--Display videos table
+SELECT * FROM videos
+
+--Create Reviews table
+CREATE TABLE reviews(
+review_num INT PRIMARY KEY,
+video_id INT NOT NULL,
+user_name VARCHAR(25) NOT NULL,
+rating INT NOT NULL,
+text_review VARCHAR(200)
+)
+;
+
+--Populate reviews table
+INSERT INTO reviews(review_num, video_id, user_name, rating, text_review)
+VALUES
+(1, 101,'Oyang Nana', 5, 'Very exciting and cool! Love their dancing!'),
+(2, 101, 'NiuBa_William86', 4, 'Nice dancing. Song is not my preferred style tho'),
+(3, 103, 'Oyang Nana', 5, 'So cool! This is even better than Sphinx!'),
+(4, 103, 'NiuBa_William86', '4', 'Good song and decent choreo. The stage lighting needs work.')
+;
+
+--Display reviews table
+SELECT * FROM reviews
+
+--Report on Video Reviews (join the two tables)
+SELECT * 
+FROM videos
+LEFT OUTER JOIN reviews ON videos.video_id = reviews.video_id
+ORDER BY videos.video_id
